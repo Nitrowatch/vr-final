@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>A-Frame 360 Video VR</title>
+  <title>A-Frame 360 Video VR - Slow Motion</title>
   <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
   <style>
     body { margin: 0; overflow: hidden; }
@@ -24,12 +24,18 @@
     <!-- Camera -->
     <a-entity camera look-controls position="0 1.6 0"></a-entity>
 
-    <!-- Script to ensure video plays -->
+    <!-- Script to ensure video plays and slow it down -->
     <script>
       const video = document.querySelector('#myVideo');
+
+      // Set video to 10x slower
+      video.playbackRate = 0.1;
+
+      // Ensure video starts playing
       video.play().catch(err => console.log('Video play error:', err));
     </script>
 
   </a-scene>
 </body>
 </html>
+
