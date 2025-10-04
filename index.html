@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>A-Frame Video Scene</title>
+    <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
+  </head>
+  <body>
+    <a-scene>
+
+      <!-- Assets: video -->
+      <a-assets>
+        <video id="myVideo" autoplay loop="true" crossOrigin="anonymous" playsinline muted>
+          <source src="video.mp4" type="video/mp4">
+        </video>
+      </a-assets>
+
+      <!-- Sky using video texture -->
+      <a-videosphere src="#myVideo"></a-videosphere>
+
+      <!-- Camera -->
+      <a-entity camera look-controls position="0 1.6 0"></a-entity>
+
+      <!-- Optional: a ground plane to interact with -->
+      <a-plane position="0 0 -4" rotation="-90 0 0" width="10" height="10" color="#555"></a-plane>
+
+    </a-scene>
+  </body>
+</html>
