@@ -2,37 +2,32 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Optimized A-Frame 360 Video VR</title>
+  <title>A-Frame 360 Video VR</title>
   <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
   <style>
     body { margin: 0; overflow: hidden; }
   </style>
 </head>
 <body>
-  <a-scene background="color: #000" vr-mode-ui="enabled: true">
+  <a-scene background="color: #000">
 
     <!-- Assets -->
     <a-assets>
-      <video id="myVideo" autoplay loop muted playsinline crossorigin="anonymous" webkit-playsinline>
-        <source src="slow_high_quality.mp4" type="video/mp4">
+      <video id="myVideo" autoplay loop muted playsinline crossorigin="anonymous">
+        <source src="video.mp4" type="video/mp4">
       </video>
     </a-assets>
 
     <!-- 360 video environment -->
-    <a-videosphere src="#myVideo" rotation="0 -90 0"></a-videosphere>
+    <a-videosphere src="#myVideo"></a-videosphere>
 
     <!-- Camera -->
     <a-entity camera look-controls position="0 1.6 0"></a-entity>
 
-    <!-- Script to ensure playback and optimize -->
+    <!-- Script to ensure video plays -->
     <script>
       const video = document.querySelector('#myVideo');
-
-      // Force video to play (needed for some browsers)
       video.play().catch(err => console.log('Video play error:', err));
-
-      // Optional: reduce frame rate slightly for smoother VR performance
-      video.preservesPitch = true; // keeps audio natural if unmuted
     </script>
 
   </a-scene>
