@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>A-Frame 360 Video VR - Slow Motion</title>
+  <title>A-Frame 360 Video VR - Smooth Slow Motion</title>
   <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
   <style>
     body { margin: 0; overflow: hidden; }
@@ -19,23 +19,34 @@
     </a-assets>
 
     <!-- 360 video environment -->
-    <a-videosphere src="#myVideo"></a-videosphere>
+    <a-videosphere id="videoSphere" src="#myVideo"></a-videosphere>
 
     <!-- Camera -->
     <a-entity camera look-controls position="0 1.6 0"></a-entity>
 
-    <!-- Script to ensure video plays and slow it down -->
+    <!-- Script for smooth slow motion -->
     <script>
       const video = document.querySelector('#myVideo');
+      const videosphere = document.querySelector('#videoSphere');
 
-      // Set video to 10x slower
+      // Set playback rate to 0.1 for 10x slower
       video.playbackRate = 0.1;
+      video.preservesPitch = true;
 
       // Ensure video starts playing
       video.play().catch(err => console.log('Video play error:', err));
+
+      // Force the videosphere material to update every frame for smoothness
+      function updateVideoTexture() {
+        if (videosphere && videosphere.getObject3D('mesh')) {
+          videosphere.getObject3D('mesh').material.map.needsUpdate = true;
+        }
+        requestAnimationFrame(updateVideoTexture);
+      }
+
+      updateVideoTexture();
     </script>
 
   </a-scene>
 </body>
 </html>
-
